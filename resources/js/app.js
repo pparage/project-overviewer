@@ -1,8 +1,11 @@
 import './bootstrap';
-import { Datepicker, Input, initTE, Ripple, Collapse} from "tw-elements";
 
+import { Datepicker, Input, initTE, Ripple, Collapse, ChipsInput, Chip, Validation, Modal, Select} from "tw-elements";
 import Alpine from 'alpinejs';
-initTE({ Datepicker, Input, Ripple, Collapse })
+import focus from '@alpinejs/focus';
+
+initTE({ Datepicker, Input, Ripple, Collapse, ChipsInput, Chip, Validation, Modal,Select })
 window.Alpine = Alpine;
+Alpine.plugin(focus);
 
 Alpine.start();
