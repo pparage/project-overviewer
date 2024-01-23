@@ -20,7 +20,7 @@
                                     Open
                                 </a>
                                 @if($project->user_id == Auth::id())
-                                    -
+
                                     <button
                                         wire:click="Livewire.dispatch('editProject', { component: 'edit-project', arguments: { project:{{ $project->id }} }})"
                                         class="text-end flex-auto text-xs font-medium uppercase leading-normal text-blue-800 dark:text-blue-300 transition duration-150 ease-in-out">
