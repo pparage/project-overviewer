@@ -8,6 +8,7 @@ use App\Models\Projects;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,7 @@ class MilestoneController extends Controller
         $milestone = Milestone::where('id', '=', $id)->first();
         return view('project.project', compact('milestone'));
     }
-    public function getMilestoneApi($id)
+    public function getMilestoneApi($id): JsonResponse
     {
         $project = Milestone::where('id', '=', $id)->first();
         return response()->json($project);
@@ -44,8 +45,6 @@ class MilestoneController extends Controller
         $end = $request->input('project_end');
 
 
-        //TODO include members to ProjectMembers
-
         $milestone = new Milestone;
         $milestone->name = $name;
         $milestone->description = $description;
@@ -56,6 +55,7 @@ class MilestoneController extends Controller
             $request->session()->flash('alert-danger', 'There was an error saving the project! Please try again.');
             return redirect()->route('milestone.create');
         } else {
+            $request->session()->flash('alert-success', 'Successfully created a new Milestone! Wohoo!');
             return redirect()->route('project.single',["id"=>$project_id]);
         }
 
@@ -64,10 +64,10 @@ class MilestoneController extends Controller
     {
         return view('milestone.create');
     }
-    public function delete($id): RedirectResponse
+    public function delete(Request $request,$id): RedirectResponse
     {
-        $milestone = Milestone::find($id)->get();
         Milestone::find($id)->delete();
-        return redirect()->route('project.single',["id"=> $milestone->project_id]);
+        $request->session()->flash('alert-success', 'Ciao! Deletion worked.');
+        return redirect()->back();
     }
 }

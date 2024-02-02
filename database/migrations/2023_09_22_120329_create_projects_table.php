@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('project_lead');
+            $table->string('project_lead')->nullable();
             $table->string('start');
             $table->string('end')->nullable();
             $table->unsignedBigInteger('user_id');

@@ -14,11 +14,14 @@ class CommentController extends Controller
         $comment = new Comment();
         $comment->comment = $request->get('comment_body');
         $comment->user()->associate($request->user());
-        $milestone = Milestone::find($request->get('milestone_id'));
-        $milestone->comments()->save($comment);
+        $comment->parent_id = $request->get('parent_id', 0); // Default parent_id to 0 if not provided
+        $comment->commentable_id = $request->get('milestone_id');
+        $comment->commentable_type = Milestone::class;
+        $comment->save();
 
         return back();
     }
+
 
     public function replyStore(Request $request): RedirectResponse
     {

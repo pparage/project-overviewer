@@ -11,6 +11,7 @@ class ProjectTeam extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
 
 
 

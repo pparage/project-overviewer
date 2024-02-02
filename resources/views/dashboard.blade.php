@@ -21,11 +21,10 @@
                                 </a>
                                 @if($project->user_id == Auth::id())
 
-                                    <button
-                                        wire:click="Livewire.dispatch('editProject', { component: 'edit-project', arguments: { project:{{ $project->id }} }})"
+                                    <a href="{{route("project.edit",['id'=>$project->id])}}"
                                         class="text-end flex-auto text-xs font-medium uppercase leading-normal text-blue-800 dark:text-blue-300 transition duration-150 ease-in-out">
                                         Edit
-                                    </button>
+                                    </a>
 
                                     <form action="{{ route('project.delete', $project->id) }}" method="POST">
                                         @csrf
